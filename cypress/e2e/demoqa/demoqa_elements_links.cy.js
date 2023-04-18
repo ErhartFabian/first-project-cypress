@@ -1,10 +1,19 @@
 describe('visitando link home', () => {
     it('passes', () => {
         cy.visit('https://demoqa.com/links')
-        cy.get('p[id=simpleLink]').click()
+        cy.get('a[id=simpleLink]').click()
 
     })
 })
+
+describe('visitando link homeTTIOR', () => {
+    it('passes', () => {
+        cy.visit('https://demoqa.com/links')
+        cy.get('a[id=dynamicLink]').click()
+
+    })
+})
+
 
 
 Cypress.on('uncaught:exception', (err, runnable) => {
