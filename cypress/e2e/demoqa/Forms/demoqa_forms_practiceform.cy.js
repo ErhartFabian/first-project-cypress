@@ -52,11 +52,6 @@ describe('Llenar todos los campos de la forma', () => {
         cy.get('tbody > :nth-child(8) > :nth-child(2)').should('contain', persona.file)
         cy.get('tbody > :nth-child(9) > :nth-child(2)').should('contain', persona.current_address)
         cy.get('tbody > :nth-child(10) > :nth-child(2)').should('contain', persona.state + ' ' + persona.city)
-
-
-
-
-
     })
 })
 
