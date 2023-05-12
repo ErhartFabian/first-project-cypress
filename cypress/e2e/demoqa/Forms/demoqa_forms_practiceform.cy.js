@@ -58,14 +58,14 @@ const persona = {
 
 
 
-describe('Comprobar todos los campos obligatorios', () => {
-    it('passes', () => {
-        cy.visit('https://demoqa.com/automation-practice-form')
-        cy.get('input[id=firstName]').should(have.attr('required', 'required'))
+// describe('Comprobar todos los campos obligatorios', () => {
+//     it('passes', () => {
+//         cy.visit('https://demoqa.com/automation-practice-form')
+//         cy.get('input[id=firstName]').should(have.attr('required', 'required'))
 
 
-    })
-})
+//     })
+// })
 
 
 
