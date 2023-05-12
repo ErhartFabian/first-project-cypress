@@ -58,12 +58,12 @@ describe('Llenar todos los campos de la forma', () => {
 
 
 
-// describe('Comprobar todos los campos obligatorios', () => {
-//     it('passes', () => {
-//         cy.visit('https://demoqa.com/automation-practice-form')
+describe('Comprobar todos los campos obligatorios', () => {
+    it('passes', () => {
+        cy.visit('https://demoqa.com/automation-practice-form')
 
-//     })
-// })
+    })
+})
 
 
 
