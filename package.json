@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "my-server -p 3030",
+    "start": "yarn run cypress --record false",
     "cy:run": "cypress run",
     "test": "start-server-and-test start http://localhost:3030 cy:run"
   },
