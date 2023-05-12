@@ -11,5 +11,5 @@ module.exports = defineConfig({
   e2e: {
     experimentalStudio: true
   }
+  
 });
-
