@@ -1,9 +1,8 @@
 {
-"scripts": {
-    "test": "cypress run",
-    "build": "echo building ... server ... done!",
-    "start": "serve public",
-    "start2": "serve -p 8000 public"
+  "scripts": {
+    "start": "my-server -p 3030",
+    "cy:run": "cypress run",
+    "test": "start-server-and-test start http://localhost:3030 cy:run"
   },
   "private": true,
   "devDependencies": {
