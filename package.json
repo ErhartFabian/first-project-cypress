@@ -2,11 +2,11 @@
   "scripts": {
     "start": "my-server -p 3030",
     "cy:run": "cypress run",
-    "test": "start-server-and-test start http://localhost:3000 cy:run"
+    "test": "start-server-and-test start http://localhost:3030 cy:run"
   },
   "private": true,
   "devDependencies": {
-    "cypress": "^12.9.0",
+    "cypress": "^12.12.0",
     "start-server-and-test": "^2.0.0"
   }
 }
