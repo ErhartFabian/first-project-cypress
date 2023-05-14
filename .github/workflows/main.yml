@@ -21,7 +21,8 @@ jobs:
           # https://docs.cypress.io/guides/continuous-integration/introduction#Boot-your-server
           install: yarn add cypress --dev && yarn install 
           start: npx cypress run --record false
-          wait-on: 'http://localhost:3000' # Waits for above
+          wait-on: 'http://www.google.com' 
+          # the url is for the web server that Cypress will try to reach before running tests
           # Records to Cypress Cloud 
           # https://docs.cypress.io/guides/cloud/projects#Set-up-a-project-to-record
           record: true
