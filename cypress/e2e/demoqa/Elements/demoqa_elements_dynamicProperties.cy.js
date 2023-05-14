@@ -31,7 +31,6 @@ describe('Button text color changed to red', () => {
 describe(' Button visible after 5 seconds not visible', () => {
     it('passes', () => {
         cy.visit('https://demoqa.com/dynamic-properties')
-        //boton no debe existir
         cy.get('button[id=visibleAfter]').should('not.exist')
     })
 })
