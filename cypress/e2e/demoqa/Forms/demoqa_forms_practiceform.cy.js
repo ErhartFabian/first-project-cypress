@@ -73,5 +73,6 @@ const persona = {
 Cypress.on('uncaught:exception', (err, runnable) => {
     // returning false here prevents Cypress from
     // failing the test
+    //not always necessary but it is a good practice
     return false
 })
