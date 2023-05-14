@@ -17,6 +17,7 @@ jobs:
         with:
           # Starts web server for E2E tests - replace with your own server invocation
           # https://docs.cypress.io/guides/continuous-integration/introduction#Boot-your-server
+          browser: chrome
           install: yarn add cypress --dev && yarn install 
           start: npx cypress run --record false
           # the url is for the web server that Cypress will try to reach before running tests
