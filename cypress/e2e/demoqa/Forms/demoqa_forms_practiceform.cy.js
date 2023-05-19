@@ -58,14 +58,19 @@ const persona = {
 
 
 
-// describe('Comprobar todos los campos obligatorios', () => {
-//     it('passes', () => {
-//         cy.visit('https://demoqa.com/automation-practice-form')
-//         cy.get('input[id=firstName]').should(have.attr('required', 'required'))
-
-
-//     })
-// })
+describe('Comprobar todos los campos obligatorios', () => {
+    it('passes', () => {
+        cy.visit('https://demoqa.com/automation-practice-form')
+        cy.get('#submit').click({ force: true });
+        //input con id firstName debe tener required como atributo
+        cy.get('input[id=firstName]').should('have.attr', 'required')
+        cy.get('input[id=lastName]').should('have.attr', 'required')
+        cy.get('input[id=gender-radio-1]').should('have.attr', 'required')
+        cy.get('input[id=gender-radio-2]').should('have.attr', 'required')
+        cy.get('input[id=gender-radio-3]').should('have.attr', 'required')
+        cy.get('input[id=userNumber]').should('have.attr', 'required')
+    })
+})
 
 
 
