@@ -1,6 +1,7 @@
 describe('hacer click solo home', () => {
   it('passes', () => {
     cy.visit('https://demoqa.com/checkbox')
+    cy.wait(3000)
     cy.get('button[title=Toggle]').click()
     cy.get('input[id=tree-node-home]').click({force: true})
   })
