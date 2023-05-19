@@ -1,4 +1,4 @@
-describe.only('double click button', () => {
+describe('double click button', () => {
     it('passes', () => {
         cy.visit('https://demoqa.com/buttons')
         cy.get('button[id=doubleClickBtn]').dblclick()
