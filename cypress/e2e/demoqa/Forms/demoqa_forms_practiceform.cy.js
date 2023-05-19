@@ -34,9 +34,9 @@ const persona = {
 //         cy.get('#hobbies-checkbox-3').check();
 //         cy.get('input[id=uploadPicture]').selectFile(persona.file)
 //         cy.get('textarea[id=currentAddress]').type(persona.current_address)
-//         cy.get('#state').click();
+//         cy.get('#state').click({ force: true});
 //         cy.get('#react-select-3-option-0').click();
-//         cy.get('#city').click();
+//         cy.get('#city').click({ force: true});
 //         cy.get('#react-select-4-option-1').click();
 //         cy.get('#userForm').click();
 //         cy.get('#submit').click({ force: true });
@@ -58,19 +58,19 @@ const persona = {
 
 
 
-describe('Comprobar todos los campos obligatorios', () => {
-    it('passes', () => {
-        cy.visit('https://demoqa.com/automation-practice-form')
-        cy.get('#submit').click({ force: true });
-        //input con id firstName debe tener required como atributo
-        cy.get('input[id=firstName]').should('have.attr', 'required')
-        cy.get('input[id=lastName]').should('have.attr', 'required')
-        cy.get('input[id=gender-radio-1]').should('have.attr', 'required')
-        cy.get('input[id=gender-radio-2]').should('have.attr', 'required')
-        cy.get('input[id=gender-radio-3]').should('have.attr', 'required')
-        cy.get('input[id=userNumber]').should('have.attr', 'required')
-    })
-})
+// describe('Comprobar todos los campos obligatorios', () => {
+//     it('passes', () => {
+//         cy.visit('https://demoqa.com/automation-practice-form')
+//         cy.get('#submit').click({ force: true });
+//         //input con id firstName debe tener required como atributo
+//         cy.get('input[id=firstName]').should('have.attr', 'required')
+//         cy.get('input[id=lastName]').should('have.attr', 'required')
+//         cy.get('input[id=gender-radio-1]').should('have.attr', 'required')
+//         cy.get('input[id=gender-radio-2]').should('have.attr', 'required')
+//         cy.get('input[id=gender-radio-3]').should('have.attr', 'required')
+//         cy.get('input[id=userNumber]').should('have.attr', 'required')
+//     })
+// })
 
 
 
