@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "cypress": "^13.14.1"
+    "cypress": "^14.5.2"
   },
   "scripts": {
     "cy:run": "cypress run"
