@@ -1,7 +1,6 @@
 name: Cypress Tests
 on: [push]
 
-# ESTO SOLUCIONA EL ERROR "Resource not accessible"
 permissions:
   contents: read
   actions: read
@@ -14,12 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      # Si decidiste usar paralelismo, mantén el matrix. Si no, puedes borrarlo.
       matrix:
-        containers: [1,2,3] 
+        # Esto crea las 3 máquinas que vimos en tu captura de pantalla
+        containers: [1, 2, 3] 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4 # Actualizado a v4
+        uses: actions/checkout@v4
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
@@ -27,7 +26,12 @@ jobs:
           browser: chrome
           install: yarn install
           record: true
-          parallel: true # Solo si usas matrix, si no, cámbialo a false
+          parallel: true
+          # CONFIGURACIÓN DEL NOMBRE DEL GRUPO
+          # Esto cambiará "Unnamed" por el nombre de la rama y el navegador
+          group: 'UI Tests - ${{ github.ref_name }} - Chrome'
+          # Opcional: añade etiquetas para filtrar mejor en el dashboard
+          tag: '${{ github.event_name }}, chrome'
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -35,5 +39,6 @@ jobs:
       - name: Publish Cypress Report Summary
         if: always()
         run: |
-          echo "### Cypress Results Summary" >> $GITHUB_STEP_SUMMARY
-          echo "Ejecución finalizada. Revisa los detalles en Cypress Cloud." >> $GITHUB_STEP_SUMMARY
+          echo "### Cypress Results Summary 🚀" >> $GITHUB_STEP_SUMMARY
+          echo "Ejecución finalizada en el contenedor #${{ matrix.containers }}." >> $GITHUB_STEP_SUMMARY
+          echo "Revisa los detalles completos en [Cypress Cloud](https://cloud.cypress.io)." >> $GITHUB_STEP_SUMMARY
