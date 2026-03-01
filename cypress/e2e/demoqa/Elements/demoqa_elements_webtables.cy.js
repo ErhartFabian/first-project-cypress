@@ -16,66 +16,64 @@ let personas = [
 ];
 
 describe('añadir 13 filas', () => {
-    it('passes', () => {
-        cy.visit('https://demoqa.com/webtables')
-        for (let i = 0; i < 12; i++) {
-            cy.get('button[id=addNewRecordButton]').click()
-            cy.get('input[id=firstName]').type(personas[i].firstname)
-            cy.get('input[id=lastName]').type(personas[i].lastname)
-            cy.get('input[id=userEmail]').type(personas[i].email)
-            cy.get('input[id=age]').type(personas[i].age)
-            cy.get('input[id=salary]').type(personas[i].salary)
-            cy.get('input[id=department]').type(personas[i].department)
-            cy.get('button[id=submit]').click()
-        }
-        cy.get('span.select-wrap > select').select(2)
+   it('passes', () => {
+       cy.visit('https://demoqa.com/webtables')
+       for (let i = 0; i < 12; i++) {
+           cy.get('button[id=addNewRecordButton]').click()
+           cy.get('input[id=firstName]').type(personas[i].firstname)
+           cy.get('input[id=lastName]').type(personas[i].lastname)
+           cy.get('input[id=userEmail]').type(personas[i].email)
+           cy.get('input[id=age]').type(personas[i].age)
+           cy.get('input[id=salary]').type(personas[i].salary)
+           cy.get('input[id=department]').type(personas[i].department)
+           cy.get('button[id=submit]').click()
+       }
+       cy.get('select[class=form-control]').select("Show 20")
+   })
+   
+})
 
+describe('buscar por nombre', () => {
+    it('passes', () => {
+       cy.visit('https://demoqa.com/webtables')
+       for (let i = 0; i < 3; i++) {
+           cy.get('button[id=addNewRecordButton]').click()
+           cy.get('input[id=firstName]').type(personas[i].firstname)
+           cy.get('input[id=lastName]').type(personas[i].lastname)
+           cy.get('input[id=userEmail]').type(personas[i].email)
+           cy.get('input[id=age]').type(personas[i].age)
+           cy.get('input[id=salary]').type(personas[i].salary)
+           cy.get('input[id=department]').type(personas[i].department)
+           cy.get('button[id=submit]').click()
+       }
+        cy.get('input[id=searchBox]').type('Juan')
+        cy.get('div').contains(personas[0].firstname)
+        cy.get('tbody > tr > :nth-child(1)').should('have.text', personas[0].firstname)
     })
 })
 
 describe('mostrar 20 filas', () => {
     it('passes', () => {
         cy.visit('https://demoqa.com/webtables')
-        cy.get('span.select-wrap > select').select(2)
-    })
-})
-
-
-describe('probar el filtro', () => {
-    it('passes', () => {
-        cy.visit('https://demoqa.com/webtables')
-        for (let i = 0; i < 5; i++) {
-            cy.get('button[id=addNewRecordButton]').click()
-            cy.get('input[id=firstName]').type(personas[i].firstname)
-            cy.get('input[id=lastName]').type(personas[i].lastname)
-            cy.get('input[id=userEmail]').type(personas[i].email)
-            cy.get('input[id=age]').type(personas[i].age)
-            cy.get('input[id=salary]').type(personas[i].salary)
-            cy.get('input[id=department]').type(personas[i].department)
-            cy.get('button[id=submit]').click()
-
-        }
-        cy.get('input[id=searchBox]').type('Juan')
-        cy.get('div').contains(personas[0].firstname)
+        cy.get('select[class=form-control]').select("Show 20")
     })
 })
 
 describe('botones previous y next', () => {
-    it('passes', () => {
-        cy.visit('https://demoqa.com/webtables')
-        for (let i = 0; i < 12; i++) {
-            cy.get('button[id=addNewRecordButton]').click()
-            cy.get('input[id=firstName]').type(personas[i].firstname)
-            cy.get('input[id=lastName]').type(personas[i].lastname)
-            cy.get('input[id=userEmail]').type(personas[i].email)
-            cy.get('input[id=age]').type(personas[i].age)
-            cy.get('input[id=salary]').type(personas[i].salary)
-            cy.get('input[id=department]').type(personas[i].department)
-            cy.get('button[id=submit]').click()
-        }
-        cy.get('span.select-wrap > select').select(1)
+   it('passes', () => {
+       cy.visit('https://demoqa.com/webtables')
+       for (let i = 0; i < 12; i++) {
+           cy.get('button[id=addNewRecordButton]').click()
+           cy.get('input[id=firstName]').type(personas[i].firstname)
+           cy.get('input[id=lastName]').type(personas[i].lastname)
+           cy.get('input[id=userEmail]').type(personas[i].email)
+           cy.get('input[id=age]').type(personas[i].age)
+           cy.get('input[id=salary]').type(personas[i].salary)
+           cy.get('input[id=department]').type(personas[i].department)
+           cy.get('button[id=submit]').click()
+       }
         cy.get('button').contains('Next').click()
-        cy.wait(3000)
+        cy.wait(1000)
         cy.get('button').contains('Previous').click()
 
     })

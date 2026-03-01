@@ -1,40 +1,39 @@
+
 describe('hacer click solo home', () => {
   it('passes', () => {
     cy.visit('https://demoqa.com/checkbox')
     cy.wait(3000)
-    cy.get('button[title=Toggle]').click()
-    cy.get('input[id=tree-node-home]').click({force: true})
+    cy.get('.rc-tree-switcher').click({force: true})
+    cy.get('.rc-tree-treenode-switcher-open > .rc-tree-checkbox').click({force: true})
   })
 })
+
 
 describe('hacer click solo en Desktop dentro de home', () => {
   it('passes', () => {
     cy.visit('https://demoqa.com/checkbox')
-    cy.get('button[title=Toggle]').click()
-    cy.get('button[title=Toggle]').eq(1).click()
-    cy.get('input[id=tree-node-desktop]').click({force: true})
+    cy.get('.rc-tree-switcher').click({force: true})
+    cy.get(':nth-child(2) > .rc-tree-checkbox').click({force: true})
   })
 })
 
-describe('hacer click solo en Workspace dentro de desktop dentro de home', () => {
+describe('hacer click solo en Workspace dentro de Documents dentro de home', () => {
   it('passes', () => {
     cy.visit('https://demoqa.com/checkbox')
-    cy.get('button[title=Toggle]').click()
-    cy.get('button[title=Toggle]').eq(2).click()
-    cy.get('button[title=Toggle]').eq(3).click()
-    cy.get('input[id=tree-node-workspace]').click({force: true})
+    cy.get('.rc-tree-switcher').click({force: true})
+    cy.get(':nth-child(3) > .rc-tree-switcher').click({force: true})
+    cy.get(':nth-child(4) > .rc-tree-checkbox').click({force: true})
   })
 })
 
 describe('hacer click en Angular que esta dentro de Workspace dentro de desktop dentro de home', () => {
   it('passes', () => {
     cy.visit('https://demoqa.com/checkbox')
-    cy.get('button[title=Toggle]').click()
-    cy.get('button[title=Toggle]').eq(2).click()
-    cy.get('button[title=Toggle]').eq(3).click()
-    cy.get('button[title=Toggle]').eq(5).click()
-    cy.get('input[id=tree-node-angular]').click({force: true})
-
+    cy.visit('https://demoqa.com/checkbox')
+    cy.get('.rc-tree-switcher').click({force: true})
+    cy.get(':nth-child(3) > .rc-tree-switcher').click({force: true})
+    cy.get(':nth-child(4) > .rc-tree-switcher').click({force: true})
+    cy.get(':nth-child(6) > .rc-tree-checkbox').click({force: true})
   })
 })
 
