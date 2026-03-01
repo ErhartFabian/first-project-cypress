@@ -10,23 +10,26 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Cypress run
-        uses: cypress-io/github-action@v4
-        id: cypress # Añadimos un ID para referenciarlo si es necesario
+        uses: cypress-io/github-action@v6 # Actualizado a v6 para mejor compatibilidad
         with:
           browser: chrome
-          # Nota: 'install' suele ser automático, pero mantenemos tu configuración
-          install: yarn add cypress --dev && yarn install 
-          start: npx cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }}
+          # Instalación limpia
+          install: yarn install
+          # ACTIVAMOS EL REGISTRO NATIVO
+          record: true
+          # Si NO tienes un servidor web que encender (ej. localhost), 
+          # elimina o comenta la línea de abajo. 
+          # Si la necesitas para tu App, cámbiala por 'yarn start'.
+          # start: yarn start 
         env:
+          # Estas variables permiten que la acción se comunique con la Cloud
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # --- ESTA ES LA PARTE QUE DEBES AGREGAR/ASEGURAR ---
-      # Si usas una acción específica para el resumen (summary), 
-      # debes ponerle el "if: always()"
+      # Este paso genera el resumen en la pestaña 'Summary' de GitHub
+      # Se ejecutará incluso si los tests fallan.
       - name: Publish Cypress Report Summary
-        if: always() # Esto garantiza que se ejecute aunque el paso anterior falle
+        if: always() 
         run: |
-          echo "Generando resumen de resultados..."
-          # Si tu resumen depende de un plugin de GitHub Actions, 
-          # asegúrate de que ese paso tenga esta condición.
+          echo "### Cypress Results Summary" >> $GITHUB_STEP_SUMMARY
+          echo "Los resultados se han sincronizado con Cypress Cloud." >> $GITHUB_STEP_SUMMARY
