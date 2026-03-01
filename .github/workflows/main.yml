@@ -1,35 +1,39 @@
 name: Cypress Tests
 on: [push]
+
+# ESTO SOLUCIONA EL ERROR "Resource not accessible"
+permissions:
+  contents: read
+  actions: read
+  checks: write
+  pull-requests: write
+  statuses: write
+
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: false 
+      fail-fast: false
+      # Si decidiste usar paralelismo, mantén el matrix. Si no, puedes borrarlo.
+      matrix:
+        containers: [1,2,3] 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4 # Actualizado a v4
 
       - name: Cypress run
-        uses: cypress-io/github-action@v6 # Actualizado a v6 para mejor compatibilidad
+        uses: cypress-io/github-action@v6
         with:
           browser: chrome
-          # Instalación limpia
           install: yarn install
-          # ACTIVAMOS EL REGISTRO NATIVO
           record: true
-          # Si NO tienes un servidor web que encender (ej. localhost), 
-          # elimina o comenta la línea de abajo. 
-          # Si la necesitas para tu App, cámbiala por 'yarn start'.
-          # start: yarn start 
+          parallel: true # Solo si usas matrix, si no, cámbialo a false
         env:
-          # Estas variables permiten que la acción se comunique con la Cloud
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Este paso genera el resumen en la pestaña 'Summary' de GitHub
-      # Se ejecutará incluso si los tests fallan.
       - name: Publish Cypress Report Summary
-        if: always() 
+        if: always()
         run: |
           echo "### Cypress Results Summary" >> $GITHUB_STEP_SUMMARY
-          echo "Los resultados se han sincronizado con Cypress Cloud." >> $GITHUB_STEP_SUMMARY
+          echo "Ejecución finalizada. Revisa los detalles en Cypress Cloud." >> $GITHUB_STEP_SUMMARY
