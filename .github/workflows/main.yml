@@ -4,32 +4,25 @@ jobs:
   cypress-run:
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: false 
+      fail-fast: false
+      # AQUÍ DEFINES CUÁNTAS MÁQUINAS QUIERES (ej. 3 máquinas)
+      matrix:
+        containers: [1, 2, 3] 
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
       - name: Cypress run
-        uses: cypress-io/github-action@v6 # Actualizado a v6 para mejor compatibilidad
+        uses: cypress-io/github-action@v6
         with:
           browser: chrome
-          # Instalación limpia
-          install: yarn install
-          # ACTIVAMOS EL REGISTRO NATIVO
           record: true
-          # Si NO tienes un servidor web que encender (ej. localhost), 
-          # elimina o comenta la línea de abajo. 
-          # Si la necesitas para tu App, cámbiala por 'yarn start'.
-          # start: yarn start 
+          # ESTO ACTIVA LA REPARTICIÓN DE TESTS
+          parallel: true
         env:
-          # Estas variables permiten que la acción se comunique con la Cloud
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Este paso genera el resumen en la pestaña 'Summary' de GitHub
-      # Se ejecutará incluso si los tests fallan.
-      - name: Publish Cypress Report Summary
-        if: always() 
-        run: |
-          echo "### Cypress Results Summary" >> $GITHUB_STEP_SUMMARY
-          echo "Los resultados se han sincronizado con Cypress Cloud." >> $GITHUB_STEP_SUMMARY
+      - name: Publish Summary
+        if: always()
+        run: echo "Finalizado en el contenedor ${{ matrix.containers }}" >> $GITHUB_STEP_SUMMARY
