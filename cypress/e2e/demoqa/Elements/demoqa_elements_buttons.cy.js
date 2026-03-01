@@ -2,7 +2,8 @@ describe('double click button', () => {
     it('passes', () => {
         cy.visit('https://demoqa.com/buttons')
         //posible escenario erroneo
-        cy.get('button[id=doubleClickBtn]').dblclick()
+        //cy.get('button[id=doubleClickBtn]').dblclick() correcto
+        cy.get('button[id=doubleClickBtns]').dblclick() 
     })
 })
 
