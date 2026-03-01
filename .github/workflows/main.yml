@@ -3,29 +3,30 @@ on: [push]
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
-    # Runs tests in parallel with matrix strategy https://docs.cypress.io/guides/guides/parallelization
-    # https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
-    # Also see warning here https://github.com/cypress-io/github-action#parallel
     strategy:
-      fail-fast: false # https://github.com/cypress-io/github-action/issues/48
+      fail-fast: false 
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
       - name: Cypress run
-        # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
         uses: cypress-io/github-action@v4
+        id: cypress # Añadimos un ID para referenciarlo si es necesario
         with:
-          # Starts web server for E2E tests - replace with your own server invocation
-          # https://docs.cypress.io/guides/continuous-integration/introduction#Boot-your-server
           browser: chrome
+          # Nota: 'install' suele ser automático, pero mantenemos tu configuración
           install: yarn add cypress --dev && yarn install 
           start: npx cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }}
-          # the url is for the web server that Cypress will try to reach before running tests
-          # Records to Cypress Cloud 
-          # https://docs.cypress.io/guides/cloud/projects#Set-up-a-project-to-record
         env:
-          # For recording and parallelization to work you must set your CYPRESS_RECORD_KEY
-          # in GitHub repo → Settings → Secrets → Actions
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          # Creating a token https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # --- ESTA ES LA PARTE QUE DEBES AGREGAR/ASEGURAR ---
+      # Si usas una acción específica para el resumen (summary), 
+      # debes ponerle el "if: always()"
+      - name: Publish Cypress Report Summary
+        if: always() # Esto garantiza que se ejecute aunque el paso anterior falle
+        run: |
+          echo "Generando resumen de resultados..."
+          # Si tu resumen depende de un plugin de GitHub Actions, 
+          # asegúrate de que ese paso tenga esta condición.
