@@ -29,8 +29,7 @@ describe('Llenar todos los campos de la forma', () => {
         cy.get('#subjectsInput').type(persona.subjects[0]);
         cy.get('#react-select-2-option-0').click();
         cy.get('#subjectsInput').type(persona.subjects[1]);
-        cy.get('#react-select-2-option-0').click();
-        //cy.get('#hobbiesWrapper > .col-md-9 > :nth-child(3) > .custom-control-label').click({ force: true });
+        cy.get('#react-select-2-option-1').click();
         cy.get('input[id=hobbies-checkbox-1]').check();
         cy.get('#hobbies-checkbox-3').check();
         cy.get('input[id=uploadPicture]').selectFile(persona.file)
