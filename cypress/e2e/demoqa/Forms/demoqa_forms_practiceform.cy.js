@@ -30,17 +30,17 @@ describe('Llenar todos los campos de la forma', () => {
         cy.get('#react-select-2-option-0').click();
         cy.get('#subjectsInput').type(persona.subjects[1]);
         cy.get('#react-select-2-option-0').click();
-        cy.get('#hobbiesWrapper > .col-md-9 > :nth-child(3) > .custom-control-label').click({ force: true });
+        //cy.get('#hobbiesWrapper > .col-md-9 > :nth-child(3) > .custom-control-label').click({ force: true });
+        cy.get('input[id=hobbies-checkbox-1]').check();
         cy.get('#hobbies-checkbox-3').check();
         cy.get('input[id=uploadPicture]').selectFile(persona.file)
         cy.get('textarea[id=currentAddress]').type(persona.current_address)
         cy.get('#state').click({ force: true});
-        cy.get('#react-select-3-option-0').click();
-        cy.get('#city').click({ force: true});
-        cy.get('#react-select-4-option-1').click();
+        cy.get('input[id=react-select-3-input]').type(persona.state).type('{enter}');
+        cy.get('input[id=react-select-4-input]').type(persona.city).type('{enter}');
         cy.get('#userForm').click();
         cy.get('#submit').click({ force: true });
-
+        
         //confirmacion de los datos ingresados
         cy.get('tbody > :nth-child(1) > :nth-child(2)').should('contain', persona.first_name + ' ' + persona.last_name)
         cy.get('tbody > :nth-child(2) > :nth-child(2)').should('contain', persona.email)
