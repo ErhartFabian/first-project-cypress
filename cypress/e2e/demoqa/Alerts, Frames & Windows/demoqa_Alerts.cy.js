@@ -18,13 +18,17 @@ describe('DemoQA Alerts', () => {
         })
     })
 
-    it('Alert with Textbox', () => {
-        cy.get('#promtButton').click()
-        cy.window().then((win) => {
-            cy.stub(win, 'prompt').returns('Cypress')
-            cy.get('#promptResult').should('have.text', 'You entered Cypress')
-        })
+    it('Alert with text input', () => {
+    cy.visit('https://demoqa.com/alerts')
+    cy.window().then((win) => {
+      cy.stub(win, 'prompt').returns('Prueba Cypress').as('promptStub')
     })
+    cy.get('#promtButton').click()
+    cy.get('@promptStub').should('have.been.calledOnce')
+    cy.get('#promptResult')
+      .should('be.visible')
+      .and('contain.text', 'Prueba Cypress')
+  })
 })
 
 Cypress.on('uncaught:exception', (err, runnable) => {
