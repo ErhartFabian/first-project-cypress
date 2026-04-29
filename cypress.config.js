@@ -5,9 +5,13 @@ module.exports = defineConfig({
   e2e: {
     experimentalStudio: true,
     setupNodeEvents(on, config) {
-      // implement node event listeners here
+      // cypress-mcp runs as a standalone MCP server, not as a plugin
+      // See: https://github.com/jams4code/cypress-mcp
+
+      // Puedes implementar otros listeners aquí si los necesitas
+      return config;
     },
-    // Usa variables de entorno para viewportWidth y viewportHeight
+    // Mantienes tus variables de entorno para el viewport
     viewportWidth: process.env.VIEWPORT_WIDTH ? Number(process.env.VIEWPORT_WIDTH) : 1900,
     viewportHeight: process.env.VIEWPORT_HEIGHT ? Number(process.env.VIEWPORT_HEIGHT) : 1100,
   },  
