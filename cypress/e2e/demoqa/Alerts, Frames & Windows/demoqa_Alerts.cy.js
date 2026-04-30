@@ -27,8 +27,7 @@ describe('DemoQA Alerts', () => {
     cy.get('@promptStub').should('have.been.calledOnce')
     cy.get('#promptResult')
       .should('be.visible')
-      //.and('contain.text', 'Prueba Cypress')
-      .and('contain.text', 'Prueba Cypress error esperado') //error
+            .and('contain.text', 'You entered Prueba Cypress')
 
   })
 })
