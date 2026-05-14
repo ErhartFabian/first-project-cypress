@@ -26,7 +26,7 @@ jobs:
           browser: chrome
           install: yarn install
           record: true
-          parallel: true
+          parallel: false
           # CONFIGURACIÓN DEL NOMBRE DEL GRUPO
           # Esto cambiará "Unnamed" por el nombre de la rama y el navegador
           group: 'UI Tests - ${{ github.ref_name }} - Chrome'
